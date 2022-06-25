@@ -1,6 +1,9 @@
 @import 'base/variable';
+@import 'mixin/fontSmoothing';
+@import 'mixin/fontFeature';
+@import 'mixin/u-contentCenter';
+@import 'mixin/u-mediaQuery';
 @import 'base/reset';
-@import 'base/font';
 @import 'base/common';
 
 .content {
