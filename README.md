@@ -1,3 +1,4 @@
+# memory-game
 ## 使い方
 
 インストール
@@ -15,5 +16,3 @@ src
 出力先ディレクトリ
 
 dist
-# memory-game
-# memory-game
