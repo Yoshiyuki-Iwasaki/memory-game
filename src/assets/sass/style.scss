@@ -1,0 +1,34 @@
+@import 'base/variable';
+@import 'base/reset';
+@import 'base/font';
+@import 'base/common';
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  @include u-contentCenter;
+}
+
+.card {
+  margin: 5px;
+  border: 1px solid #333;
+  width: 20%;
+  height: 114px;
+}
+
+.text {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  font-size: 18px;
+  font-weight: 700;
+
+  &.js-active {
+    opacity: 1 !important;
+    background: red;
+  }
+}
