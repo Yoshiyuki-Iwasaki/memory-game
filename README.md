@@ -1,8 +1,7 @@
 # memory-game
 
 
-https://user-images.githubusercontent.com/32511210/175810017-8a21d403-1dc3-49d0-8601-dac4b3aeb4f9.mov
-
+https://user-images.githubusercontent.com/32511210/175826478-4562a1a2-67dd-4b5c-9e30-8f0f252c3ce8.mov
 
 
 ## バージョン
