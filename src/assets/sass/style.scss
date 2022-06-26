@@ -6,10 +6,28 @@
 @import 'base/reset';
 @import 'base/common';
 
+.pageSec {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @include u-contentCenter;
+  width: 600px;
+}
+
+.timer {
+}
+
+.timerText {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
 .content {
   display: flex;
   flex-wrap: wrap;
-  @include u-contentCenter;
 }
 
 .card {
