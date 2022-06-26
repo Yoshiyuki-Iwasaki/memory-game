@@ -1,14 +1,13 @@
 // DOM取得
 const content = document.getElementById('content');
-const imageDirectory = './assets/image/';
 let firstFlag: boolean, secondFlag: boolean, firstData: any, secondData: any;
 // トランプデータ取得
 const TrumpData = [
-  imageDirectory + 'icon.jpg',
-  imageDirectory + 'icon02.jpg',
-  imageDirectory + 'icon03.jpg',
-  imageDirectory + 'icon04.jpg',
-  imageDirectory + 'icon05.jpg',
+  'icon.jpg',
+  'icon02.jpg',
+  'icon03.jpg',
+  'icon04.jpg',
+  'icon05.jpg',
 ];
 
 // 配列をシャッフルする関数
@@ -26,8 +25,10 @@ const reflectDataFunction = () => {
   const TrumpDoubleData = [...TrumpData, ...TrumpData];
   // 配列をシャッフルした配列作成
   const TrumpShuffleData = shuffleArrayData(TrumpDoubleData);
+  // 共通画像パス
+  const imageDirectory = './assets/image/';
   // 配列のループ処理
-  TrumpShuffleData.map((data) => {
+  TrumpShuffleData.map((data: string) => {
     // div要素を作成
     const element = document.createElement('div');
     // 作成した要素にcardクラスを追加
@@ -41,16 +42,16 @@ const reflectDataFunction = () => {
     // 作成した要素のonclick属性にhandleOnClick関数を追加
     image.onclick = handleOnClick;
     // 作成した要素にテキストを追加
-    image.dataset.test = data;
+    image.dataset.check = data;
     // src属性に画像パスを追加
-    image.src = data;
+    image.src = imageDirectory + data;
     // トランプデータの要素を追加
     element?.appendChild(image);
   });
 };
 
-// カードをクリックした時
-const handleOnClick = (e: any) => {
+// トランプを引いた時の挙動を指定
+const judgeTrumpFunction = (e: any) => {
   let element = e.target;
   firstFlag = true;
 
@@ -58,10 +59,12 @@ const handleOnClick = (e: any) => {
   if (secondFlag) {
     secondData = e.target;
     secondData.style.opacity = 1;
-    if (firstData.dataset.test === secondData.dataset.test) {
+    //  1回目のカードと2回目のカードが同じだった場合
+    if (firstData.dataset.check === secondData.dataset.check) {
       firstData?.classList.add('js-active');
       element?.classList.add('js-active');
     }
+    // フラグをリセット
     firstFlag = false;
     secondFlag = false;
   }
@@ -72,10 +75,14 @@ const handleOnClick = (e: any) => {
     if (secondData) secondData.style.opacity = 0;
     secondFlag = true;
     firstData = e.target;
+    //
     firstData.style.opacity = 1;
   }
+};
 
-  element.innerHTML = element.dataset.test;
+// カードをクリックした時
+const handleOnClick = (e: any) => {
+  judgeTrumpFunction(e);
 };
 
 reflectDataFunction();
