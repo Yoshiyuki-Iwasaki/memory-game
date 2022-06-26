@@ -1,3 +1,5 @@
+import { shuffleArrayDataFunction } from './module/shuffleArrayDataFunction';
+
 // DOM取得
 const timer = document.getElementById('timer');
 const content = document.getElementById('content');
@@ -40,21 +42,12 @@ const timeFunction = () => {
   setInterval(countDown, 1000);
 };
 
-// 配列をシャッフルする関数
-const shuffleArrayData = ([...array]) => {
-  for (let i = array.length - 1; i >= 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
-
 // トランプデータの要素を追加
 const reflectDataFunction = () => {
   // 配列を複製した配列を作成
   const TrumpDoubleData = [...TrumpData, ...TrumpData];
   // 配列をシャッフルした配列作成
-  const TrumpShuffleData = shuffleArrayData(TrumpDoubleData);
+  const TrumpShuffleData = shuffleArrayDataFunction(TrumpDoubleData);
   // 共通画像パス
   const imageDirectory = './assets/image/';
   // 配列のループ処理
