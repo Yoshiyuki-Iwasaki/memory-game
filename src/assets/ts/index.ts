@@ -1,9 +1,15 @@
 // DOM取得
 const content = document.getElementById('content');
-// トランプデータ取得
-const TrumpData = ['1', '2', '3', '4', '5', '6', '7', '8'];
-
+const imageDirectory = './assets/image/';
 let firstFlag: boolean, secondFlag: boolean, firstData: any, secondData: any;
+// トランプデータ取得
+const TrumpData = [
+  imageDirectory + 'icon.jpg',
+  imageDirectory + 'icon02.jpg',
+  imageDirectory + 'icon03.jpg',
+  imageDirectory + 'icon04.jpg',
+  imageDirectory + 'icon05.jpg',
+];
 
 // 配列をシャッフルする関数
 const shuffleArrayData = ([...array]) => {
@@ -29,16 +35,17 @@ const reflectDataFunction = () => {
     //トランプデータの要素を追加
     content?.appendChild(element);
 
-    const text = document.createElement('p');
+    const image = document.createElement('img');
     // 作成した要素にcardクラスを追加
-    text.className = 'text';
+    image.className = 'image';
     // 作成した要素のonclick属性にhandleOnClick関数を追加
-    text.onclick = handleOnClick;
+    image.onclick = handleOnClick;
     // 作成した要素にテキストを追加
-    text.dataset.test = data;
-    text.innerHTML = data;
-    //トランプデータの要素を追加
-    element?.appendChild(text);
+    image.dataset.test = data;
+    // src属性に画像パスを追加
+    image.src = data;
+    // トランプデータの要素を追加
+    element?.appendChild(image);
   });
 };
 
@@ -52,8 +59,8 @@ const handleOnClick = (e: any) => {
     secondData = e.target;
     secondData.style.opacity = 1;
     if (firstData.dataset.test === secondData.dataset.test) {
-      firstData.className = 'text js-active';
-      element.className = 'text js-active';
+      firstData?.classList.add('js-active');
+      element?.classList.add('js-active');
     }
     firstFlag = false;
     secondFlag = false;
