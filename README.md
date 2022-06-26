@@ -1,18 +1,18 @@
 # memory-game
-## 使い方
 
-インストール
+## バージョン
+node: v16.14.2
+## セットアップ方法
 
-npm i -D
-
-起動・自動トランスパイル
-
-gulp
-
-作成ディレクトリ
-
-src
-
-出力先ディレクトリ
-
-dist
+1.nodeインストール
+```
+nodenv install ${.node-versionに記載されているnodeバージョン}
+```
+2.パッケージインストール
+```
+npm i
+```
+3.gulp実行
+```
+npx gulp
+```
