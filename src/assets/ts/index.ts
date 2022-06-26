@@ -1,6 +1,14 @@
 // DOM取得
+const timer = document.getElementById('timer');
 const content = document.getElementById('content');
-let firstFlag: boolean, secondFlag: boolean, firstData: any, secondData: any;
+const score = document.getElementById('score');
+const image = document.getElementsByClassName('image');
+let firstFlag: boolean,
+  secondFlag: boolean,
+  firstData: any,
+  secondData: any,
+  time: number = 50;
+
 // トランプデータ取得
 const TrumpData = [
   'icon.jpg',
@@ -9,6 +17,28 @@ const TrumpData = [
   'icon04.jpg',
   'icon05.jpg',
 ];
+
+const timeFunction = () => {
+  const timerText = document.createElement('p');
+  timerText.className = 'timerText';
+  timerText.innerHTML = String(time);
+  timer?.appendChild(timerText);
+
+  const countDown = () => {
+    if (time <= 0) {
+      timerText.innerHTML = 'time up.';
+      timer?.appendChild(timerText);
+    } else if (timer?.classList.contains('completed')) {
+      timerText.innerHTML = 'CLEAR! Congratulations!';
+      timer?.appendChild(timerText);
+    } else {
+      timerText.innerHTML = String(--time);
+      timer?.appendChild(timerText);
+    }
+  };
+
+  setInterval(countDown, 1000);
+};
 
 // 配列をシャッフルする関数
 const shuffleArrayData = ([...array]) => {
@@ -41,8 +71,9 @@ const reflectDataFunction = () => {
     image.className = 'image';
     // 作成した要素のonclick属性にhandleOnClick関数を追加
     image.onclick = handleOnClick;
-    // 作成した要素にテキストを追加
+    // 作成した要素のdataset属性に設定する
     image.dataset.check = data;
+    image.dataset.completed = 'false';
     // src属性に画像パスを追加
     image.src = imageDirectory + data;
     // トランプデータの要素を追加
@@ -63,6 +94,8 @@ const judgeTrumpFunction = (e: any) => {
     if (firstData.dataset.check === secondData.dataset.check) {
       firstData?.classList.add('js-active');
       element?.classList.add('js-active');
+      firstData.dataset.completed = 'true';
+      element.dataset.completed = 'true';
     }
     // フラグをリセット
     firstFlag = false;
@@ -75,14 +108,23 @@ const judgeTrumpFunction = (e: any) => {
     if (secondData) secondData.style.opacity = 0;
     secondFlag = true;
     firstData = e.target;
-    //
     firstData.style.opacity = 1;
+  }
+};
+
+const completedFunction = () => {
+  var array = Array.prototype.slice.call(image);
+  const ifCompleted = array.some((item) => item.dataset.completed === 'false');
+  if (!ifCompleted) {
+    timer?.classList.add('completed');
   }
 };
 
 // カードをクリックした時
 const handleOnClick = (e: any) => {
   judgeTrumpFunction(e);
+  completedFunction();
 };
 
 reflectDataFunction();
+timeFunction();
